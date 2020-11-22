@@ -1,6 +1,6 @@
-namespace Nuages.QueueService.Tasks
+namespace Nuages.QueueService.Jobs
 {
-    public class TaskDefinition
+    public class JobDefinition
     {
         public string AssemblyQualifiedName { get; set; }
         public string JsonPayload { get; set; }

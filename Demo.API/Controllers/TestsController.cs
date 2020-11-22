@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Nuages.QueueService;
-using Nuages.QueueService.Tasks;
+using Nuages.QueueService.Jobs;
 // ReSharper disable InconsistentNaming
 
 namespace Demo.API.Controllers
@@ -17,7 +17,7 @@ namespace Demo.API.Controllers
         public TestsController(IQueueService queueService, IConfiguration configuration)
         {
             _queueService = queueService;
-            _queueName = configuration.GetValue<string>("TaskWorkerService:QueueName");
+            _queueName = configuration.GetValue<string>("JobWorkerService:QueueName");
         }
         
         [HttpPost("SendToLogger")]
@@ -26,17 +26,17 @@ namespace Demo.API.Controllers
             var queueUrl = await _queueService.GetQueueUrlAsync(_queueName);
 
             return await _queueService.PublishToQueueAsync(queueUrl, 
-                typeof(SendToLoggerTask), 
-                new SendToLoggerTaskData { Message = message });
+                typeof(SendToLoggerJob), 
+                new SendToLoggerJobData { Message = message });
         }
         
         [HttpPost("SendToSNS")]
-        public async Task<ActionResult<bool>> SendToSNS(SendToSNSTaskData message)
+        public async Task<ActionResult<bool>> SendToSNS(SendToSNSJobData message)
         {
             var queueUrl = await _queueService.GetQueueUrlAsync(_queueName);
             
             return await _queueService.PublishToQueueAsync(queueUrl, 
-                typeof(SendToSNSTask), 
+                typeof(SendToSNSJob), 
                 message);
         }
         

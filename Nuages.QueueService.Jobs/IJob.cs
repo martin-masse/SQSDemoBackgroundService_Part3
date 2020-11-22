@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 
-namespace Nuages.QueueService.Tasks
+namespace Nuages.QueueService.Jobs
 {
-    public interface IQueueTask
+    public interface IJob
     {
         Task ExecuteAsync(string jsonPayload);
     }

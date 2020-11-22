@@ -1,21 +1,21 @@
 using System.Threading.Tasks;
 using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
-using Nuages.QueueService.Tasks;
+using Nuages.QueueService.Jobs;
 // ReSharper disable InconsistentNaming
 
 namespace Demo.API
 {
-    public class SendToSNSTask : QueueTask<SendToSNSTaskData>
+    public class SendToSNSJob : Job<SendToSNSJobData>
     {
         private readonly IAmazonSimpleNotificationService _sns;
 
-        public SendToSNSTask(IAmazonSimpleNotificationService sns )
+        public SendToSNSJob(IAmazonSimpleNotificationService sns )
         {
             _sns = sns;
         }
         
-        protected override async Task ExecuteAsync(SendToSNSTaskData data)
+        protected override async Task ExecuteAsync(SendToSNSJobData data)
         {
             await _sns.PublishAsync(new PublishRequest
             {
@@ -28,7 +28,7 @@ namespace Demo.API
         }
     }
     
-    public class SendToSNSTaskData
+    public class SendToSNSJobData
     {
         public string Message { get; set; }
         public string Subject { get; set; }

@@ -5,38 +5,38 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Nuages.QueueService.Tasks
+namespace Nuages.QueueService.Jobs
 {
-    public class TaskWorkerService : QueueWorkerService
+    public class JobWorkerService : QueueWorkerService
     {
 
-        public TaskWorkerService(IServiceProvider serviceProvider, 
+        public JobWorkerService(IServiceProvider serviceProvider, 
                                         ILogger<QueueWorkerService> logger, 
                                         IConfiguration configuration) : base(serviceProvider, logger)
         {
-             QueueName = configuration.GetValue<string>("TaskWorkerService:QueueName");
+             QueueName = configuration.GetValue<string>("JobWorkerService:QueueName");
         }
         
         protected override async Task<bool> ProcessMessageAsync(QueueMessage msg)
         {
             try
             {
-                var taskDefinition = JsonSerializer.Deserialize<TaskDefinition>(msg.Body);
-                if (taskDefinition == null || string.IsNullOrEmpty(taskDefinition.AssemblyQualifiedName))
+                var jobDefinition = JsonSerializer.Deserialize<JobDefinition>(msg.Body);
+                if (jobDefinition == null || string.IsNullOrEmpty(jobDefinition.AssemblyQualifiedName))
                 {
                     throw new Exception($"Can't process message : {msg.MessageId}");
                 }
 
-                var type = Type.GetType(taskDefinition.AssemblyQualifiedName!);
+                var type = Type.GetType(jobDefinition.AssemblyQualifiedName!);
                 if (type == null)
                 {
                     throw new Exception(
-                        $"Can't process message, type not found : {msg.MessageId} {taskDefinition.AssemblyQualifiedName}");
+                        $"Can't process message, type not found : {msg.MessageId} {jobDefinition.AssemblyQualifiedName}");
                 }
                 
-                var task = (IQueueTask) ActivatorUtilities.CreateInstance(ServiceProvider, type);
+                var job = (IJob) ActivatorUtilities.CreateInstance(ServiceProvider, type);
 
-                await task.ExecuteAsync(taskDefinition.JsonPayload);
+                await job.ExecuteAsync(jobDefinition.JsonPayload);
                 
                 return true;
             }

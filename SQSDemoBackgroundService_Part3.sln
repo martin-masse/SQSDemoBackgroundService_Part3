@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.QueueService.SQS", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.API", "Demo.API\Demo.API.csproj", "{AACB58C4-980C-4478-B917-18E0395D1087}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.QueueService.Tasks", "Nuages.QueueService.Tasks\Nuages.QueueService.Tasks.csproj", "{5E522AFD-12B6-474B-A165-1DC21C3B012C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuages.QueueService.Jobs", "Nuages.QueueService.Jobs\Nuages.QueueService.Jobs.csproj", "{5E522AFD-12B6-474B-A165-1DC21C3B012C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

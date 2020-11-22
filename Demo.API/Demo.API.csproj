@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Nuages.QueueService.Jobs\Nuages.QueueService.Jobs.csproj" />
       <ProjectReference Include="..\Nuages.QueueService.SQS\Nuages.QueueService.SQS.csproj" />
-      <ProjectReference Include="..\Nuages.QueueService.Tasks\Nuages.QueueService.Tasks.csproj" />
       <ProjectReference Include="..\Nuages.QueueService\Nuages.QueueService.csproj" />
     </ItemGroup>
 

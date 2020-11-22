@@ -1,19 +1,19 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Nuages.QueueService.Tasks;
+using Nuages.QueueService.Jobs;
 
 namespace Demo.API
 {
-    public class SendToLoggerTask : QueueTask<SendToLoggerTaskData>
+    public class SendToLoggerJob : Job<SendToLoggerJobData>
     {
-        private readonly ILogger<SendToLoggerTask> _logger;
+        private readonly ILogger<SendToLoggerJob> _logger;
 
-        public SendToLoggerTask(ILogger<SendToLoggerTask> logger )
+        public SendToLoggerJob(ILogger<SendToLoggerJob> logger )
         {
             _logger = logger;
         }
         
-        protected override async Task ExecuteAsync(SendToLoggerTaskData data)
+        protected override async Task ExecuteAsync(SendToLoggerJobData data)
         {
             _logger.LogInformation(new string('=', 50));
             _logger.LogInformation($"Message :  {data.Message}");
@@ -23,7 +23,7 @@ namespace Demo.API
         }
     }
     
-    public class SendToLoggerTaskData
+    public class SendToLoggerJobData
     {
         public string Message { get; set; }
     }

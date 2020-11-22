@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Nuages.QueueService.SQS;
-using Nuages.QueueService.Tasks;
+using Nuages.QueueService.Jobs;
 
 namespace Demo.API
 {
@@ -27,7 +27,7 @@ namespace Demo.API
             services.AddDefaultAWSOptions(GetAWSOptions());
             services.AddSqsService();
             
-            services.AddHostedService<TaskWorkerService>();
+            services.AddHostedService<JobWorkerService>();
             
             services.AddAWSService<IAmazonSimpleNotificationService>();
             

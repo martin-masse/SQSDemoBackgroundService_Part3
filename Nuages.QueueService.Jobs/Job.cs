@@ -1,9 +1,9 @@
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Nuages.QueueService.Tasks
+namespace Nuages.QueueService.Jobs
 {
-    public abstract class QueueTask<T> : IQueueTask
+    public abstract class Job<T> : IJob
     {
         protected abstract Task ExecuteAsync(T data);
 
