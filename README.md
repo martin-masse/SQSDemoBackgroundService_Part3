@@ -4,6 +4,10 @@ Support code for the following article
 
 https://medium.com/@martinmasse/sqs-background-service-with-net-5-part-3-3dfff137947d
 
+Latest article on this subject can be found here :
+
+https://medium.com/nuages-org/sqs-task-queue-service-with-net-6-cb3832eb22f2
+
 # Prerequisites
 
 You will need this to run the code.
